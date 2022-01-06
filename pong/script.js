@@ -21,6 +21,8 @@ var ball_x = 512;
 var ball_y = 384;
 var ball_larg = 15;
 var ball_alt = 15;
+var pont_player1 = 0
+var pont_player2 = 0
 
 var velocity = 10;
 
@@ -59,14 +61,24 @@ document.addEventListener("keyup", function(a){ // Setando o que acontece ao lib
 function inicialize(){
 
     tela.clearRect(0, 0, canvas.width, canvas.height);
-    tela.fillStyle = "#000000";
+    tela.fillStyle = "#000000";                          
     tela.fillRect(0, 0, canvas.width, canvas.height);
     tela.fillStyle = "#00FFFF";
     tela.fillRect(player1_X, player1_Y, player1_larg, player1_alt);
     tela.fillStyle = "#FFF000";
     tela.fillRect(player2_X, player2_Y, player2_larg, player2_alt);
-    tela.fillStyle = "#F00000";
+    tela.fillStyle = "#F00000"; 
     tela.fillRect(512, 0, 5, 768);
+    tela.fillStyle = "#00FFFF";
+    tela.fillText("SCORE: " + pont_player1, 10, 10)
+    tela.fillStyle = "#FFF000";
+    tela.fillText("SCORE: " + pont_player2, 965, 10)
+    
+    
+    
+    
+    console.log(pont_player1)
+    console.log(pont_player2)
 
     
     if(player1_down == true && player1_Y < 618){
@@ -94,7 +106,7 @@ function inicialize(){
 
     }
     // Determinando a colisão pra barra do player 1
-    if((ball_x + ball_larg <= player1_larg+player1_X) && ball_y + ball_alt <= player1_Y + player1_alt && ball_y + ball_alt >= player1_Y  ){
+    if((ball_x  <= player1_larg+player1_X) && ball_y + ball_alt <= player1_Y + player1_alt && ball_y + ball_alt >= player1_Y  ){
         ball_vel_x = -ball_vel_x;
         ball_vel_y = Math.floor(Math.random()*10);
 
@@ -105,13 +117,16 @@ function inicialize(){
         ball_vel_y = Math.floor(Math.random()*10);
         ball_x = 512;
         ball_y = 384;
+        pont_player1 += 1
     }
     // Gol no player 1
-    if(ball_x + ball_larg <= 0){
+    if(ball_x <= 0){
         ball_vel_x = 10;
         ball_vel_y = Math.floor(Math.random()*10);
         ball_x = 512;
         ball_y = 384;
+        pont_player2 += 1
+        
     }
     // Colisão com as paredes superiores
     if(ball_y + ball_larg >= canvas.height){
@@ -123,8 +138,6 @@ function inicialize(){
     
     
 }
-
-
 
 
 setInterval(inicialize,1000/60); //Rodar o jogo em 60 fps
