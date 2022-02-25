@@ -113,19 +113,29 @@ function inicialize(){
     }
     // Gol no player 2
     if(ball_x + ball_larg >= canvas.width){
-        ball_vel_x = 10;
-        ball_vel_y = Math.floor(Math.random()*10);
         ball_x = 512;
         ball_y = 384;
-        pont_player1 += 1
+        ball_vel_x = 0
+        ball_vel_y = 0
+        pont_player2 += 1
+        setTimeout(function(){
+            ball_vel_x = 10;
+            ball_vel_y = Math.floor(Math.random()*10);
+        },2000)
     }
     // Gol no player 1
     if(ball_x <= 0){
-        ball_vel_x = 10;
-        ball_vel_y = Math.floor(Math.random()*10);
+        
         ball_x = 512;
         ball_y = 384;
+        ball_vel_x = 0
+        ball_vel_y = 0
         pont_player2 += 1
+        setTimeout(function(){
+            ball_vel_x = -10;
+            ball_vel_y = Math.floor(Math.random()*10);
+        },2000)
+        
         
     }
     // Colisão com as paredes superiores
